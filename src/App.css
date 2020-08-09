@@ -1,3 +1,15 @@
 * {
   margin: 0;
 }
+
+.app__header{
+  /*Note: by default display:flex makes everything in a row
+  you can change it by using flex-direction: column;*/
+  display: flex; 
+  /* gives space between children elements inside the div */
+  justify-content: space-between;
+  align-items: center;
+  /* padding vs margin: padding adds space inside the element while margin
+  adds the space outside the element */
+  margin-bottom: 20px;
+}
