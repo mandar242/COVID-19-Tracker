@@ -24,6 +24,10 @@ body{
   margin-bottom: 20px;
 }
 
+.app__dropdown{
+  background-color: white;
+}
+
 .app__left{
   flex:0.9;
 }

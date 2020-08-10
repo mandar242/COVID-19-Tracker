@@ -5,6 +5,7 @@ import './App.css';
 import InfoBox from './components/InfoBox';
 import Map from './components/Map';
 import Table from './components/Table';
+import LineGraph from './components/LineGraph';
 import { sortData } from './util.js';
 
 function App() {
@@ -113,6 +114,7 @@ function App() {
             {/* Graph */}
             <CardContent>
               <h3>Worldwide new Cases</h3>
+              <LineGraph />
             </CardContent>
         </Card>
 
