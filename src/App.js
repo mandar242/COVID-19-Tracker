@@ -9,9 +9,18 @@ function App() {
 
   const [countries,setCountries] = useState([]);
   const [country, setCountry] = useState('worldwide');
-  
+  const [countryInfo, setCountryInfo] = useState({});
+
   //STATE in short is way to write a variable in REACT
   // USEEFFECT = runs a piece of code based on a given condition - a powerful hook in react
+
+  useEffect(() => {
+    fetch("https://disease.sh/v3/covid-19/all")
+    .then(response => response.json())
+    .then(data => {
+      setCountryInfo(data);
+    });
+  }, []);
 
   useEffect(() => {
     // the code inside here will run once when comonent loads and not again
@@ -36,6 +45,22 @@ function App() {
     const countryCode = event.target.value;
     console.log(countryCode);
     setCountry(countryCode);
+    
+    const url = countryCode === 'worldwide'  
+    ?'https://disease.sh/v3/covid-19/countries' 
+    :`https://disease.sh/v3/covid-19/countries/${countryCode}`
+
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        setCountry(countryCode);
+        setCountryInfo(data);
+    })
+    // for worldwide data
+    //  https://disease.sh/v3/covid-19/countries
+    // for country specific data
+    //  https://disease.sh/v3/covid-19/countries/[COUNTRY_CODE] 
+
   }
 
   return (
@@ -62,11 +87,11 @@ function App() {
           
             <div className = "app__stats">
                 {/* InfoBoxs title = "coronavirus cases*/}
-                <InfoBox title = "Coronavirus Cases" cases = {2000} total = {2000}/>
+                <InfoBox title = "New Coronavirus Cases Today" cases = {countryInfo.todayCases} total = {countryInfo.cases}/>
                 {/* InfoBoxs title = "coronavirus recoveries*/}
-                <InfoBox title = "Recovered" cases = {2000} total = {12000}/>
+                <InfoBox title = "New Recovered Today" cases = {countryInfo.todayRecovered} total = {countryInfo.recovered}/>
                 {/* InfoBoxs title*/}
-                <InfoBox title = "Deaths" cases = {2000} total = {232}/>
+                <InfoBox title = "New Deaths Today" cases = {countryInfo.todayDeaths} total = {countryInfo.deaths}/>
 
             </div>
           
