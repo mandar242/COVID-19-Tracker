@@ -1,10 +1,10 @@
 import React from 'react';
 import { Card, CardContent, Typography } from "@material-ui/core";
+import "./InfoBox.css";
 
-function InfoBox( { title, cases, total } ) {
+function InfoBox( { title, cases, total, ...props } ) {
     return (
-        <div>
-            <Card>
+            <Card onClick ={props.onClick} className = "infoBox">
                 <CardContent>
                     {/* Title */}
                     <Typography className = "infobox__title" color = "textSecondary">
@@ -18,7 +18,6 @@ function InfoBox( { title, cases, total } ) {
                     </Typography>
                 </CardContent>
             </Card>
-        </div>
     )
 }
 

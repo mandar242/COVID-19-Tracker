@@ -6,7 +6,8 @@ import InfoBox from './components/InfoBox';
 import Map from './components/Map';
 import Table from './components/Table';
 import LineGraph from './components/LineGraph';
-import { sortData } from './util.js';
+import { sortData, prettyPrint } from './util.js';
+import "leaflet/dist/leaflet.css";
 
 function App() {
 
@@ -14,6 +15,11 @@ function App() {
   const [country, setCountry] = useState('worldwide');
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
+  //const [mapCenter,setMapCenter] = useState({lat:54.5260, lng:15.2551})
+  const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
+  const [mapZoom, setMapZoom] = useState(3);;
+  const [mapCountries, setMapCountries] = useState([]);
+  const [casesType, setCasesType] = useState("cases");
 
   //STATE in short is way to write a variable in REACT
   // USEEFFECT = runs a piece of code based on a given condition - a powerful hook in react
@@ -41,6 +47,7 @@ function App() {
           }));
           const sortedData = sortData(data); 
           setTableData(sortedData);
+          setMapCountries(data);
           setCountries(countries); 
             });
           };
@@ -61,6 +68,8 @@ function App() {
     .then(data => {
         setCountry(countryCode);
         setCountryInfo(data);
+
+        setMapCenter([data.countryInfo.lat,data.countryInfo.long])
     })
     // for worldwide data
     //  https://disease.sh/v3/covid-19/countries
@@ -93,18 +102,23 @@ function App() {
           
             <div className = "app__stats">
                 {/* InfoBoxs title = "coronavirus cases*/}
-                <InfoBox title = "New Coronavirus Cases Today" cases = {countryInfo.todayCases} total = {countryInfo.cases}/>
+                <InfoBox onClick={(e) => setCasesType("cases")} title = "New Cases Today" cases = {prettyPrint(countryInfo.todayCases)} total = {prettyPrint(countryInfo.cases)}/>
                 {/* InfoBoxs title = "coronavirus recoveries*/}
-                <InfoBox title = "New Recovered Today" cases = {countryInfo.todayRecovered} total = {countryInfo.recovered}/>
+                <InfoBox onClick={(e) => setCasesType("recovered")} title = "New Recovered Today" cases = {prettyPrint(countryInfo.todayRecovered)} total = {prettyPrint(countryInfo.recovered)}/>
                 {/* InfoBoxs title*/}
-                <InfoBox title = "New Deaths Today" cases = {countryInfo.todayDeaths} total = {countryInfo.deaths}/>
+                <InfoBox onClick={(e) => setCasesType("deaths")} title = "New Deaths Today" cases = {prettyPrint(countryInfo.todayDeaths)} total = {prettyPrint(countryInfo.deaths)}/>
 
             </div>
-          
-          
+        
             {/* Map */}
-            <Map></Map>
+            <Map
+            casesType = {casesType}
+            countries = {mapCountries}
+            center = {mapCenter}
+            zoom = {mapZoom}
+            />    
         </div>
+
         <Card className = "app__right">
             {/* Table */}
             <CardContent>
