@@ -4,12 +4,15 @@ import { MenuItem, FormControl, Select, Card, CardContent} from "@material-ui/co
 import './App.css';
 import InfoBox from './components/InfoBox';
 import Map from './components/Map';
+import Table from './components/Table';
+import { sortData } from './util.js';
 
 function App() {
 
   const [countries,setCountries] = useState([]);
   const [country, setCountry] = useState('worldwide');
   const [countryInfo, setCountryInfo] = useState({});
+  const [tableData, setTableData] = useState([]);
 
   //STATE in short is way to write a variable in REACT
   // USEEFFECT = runs a piece of code based on a given condition - a powerful hook in react
@@ -35,6 +38,8 @@ function App() {
             name: country.country,
             value: country.countryInfo.iso2 
           }));
+          const sortedData = sortData(data); 
+          setTableData(sortedData);
           setCountries(countries); 
             });
           };
@@ -103,6 +108,7 @@ function App() {
             {/* Table */}
             <CardContent>
               <h3>Live Cases by Country</h3>
+              <Table countries= {tableData} />
             </CardContent>
             {/* Graph */}
             <CardContent>
