@@ -2,6 +2,16 @@
   margin: 0;
 }
 
+body{
+  background-color: rgb(140, 255, 255);
+}
+
+.app{
+  display: flex;
+  justify-content: space-evenly;
+  padding:2%;
+}
+
 .app__header{
   /*Note: by default display:flex makes everything in a row
   you can change it by using flex-direction: column;*/
@@ -12,4 +22,20 @@
   /* padding vs margin: padding adds space inside the element while margin
   adds the space outside the element */
   margin-bottom: 20px;
+}
+
+.app__left{
+  flex:0.9;
+}
+
+.app__stats{
+  display: flex;
+  justify-content: space-between;
+}
+
+/* avoid app__left and app__right squeezing on reducing screen size */
+@media (max-width: 990px) {
+  .app{
+    flex-direction: column;
+  }
 }
