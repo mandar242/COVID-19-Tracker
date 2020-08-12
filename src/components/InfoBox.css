@@ -1,6 +1,7 @@
 /* tells child elements to take as much as space as they can */
 .infoBox{
     flex: 1;
+    cursor: pointer;
 }
 
 .infoBox:not(:last-child){
@@ -20,3 +21,7 @@
     font-size: 0.8rem !important;
     margin-top: 15px !important;
   }
+
+.infoBox--selected{
+    border-top: 10px solid blueviolet;
+}

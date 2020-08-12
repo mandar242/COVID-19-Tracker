@@ -102,11 +102,11 @@ function App() {
           
             <div className = "app__stats">
                 {/* InfoBoxs title = "coronavirus cases*/}
-                <InfoBox onClick={(e) => setCasesType("cases")} title = "New Cases Today" cases = {prettyPrint(countryInfo.todayCases)} total = {prettyPrint(countryInfo.cases)}/>
+                <InfoBox active={casesType ==="cases"} onClick={(e) => setCasesType("cases")} title = "New Cases Today" cases = {prettyPrint(countryInfo.todayCases)} total = {prettyPrint(countryInfo.cases)}/>
                 {/* InfoBoxs title = "coronavirus recoveries*/}
-                <InfoBox onClick={(e) => setCasesType("recovered")} title = "New Recovered Today" cases = {prettyPrint(countryInfo.todayRecovered)} total = {prettyPrint(countryInfo.recovered)}/>
+                <InfoBox active={casesType ==="recovered"} onClick={(e) => setCasesType("recovered")} title = "New Recovered Today" cases = {prettyPrint(countryInfo.todayRecovered)} total = {prettyPrint(countryInfo.recovered)}/>
                 {/* InfoBoxs title*/}
-                <InfoBox onClick={(e) => setCasesType("deaths")} title = "New Deaths Today" cases = {prettyPrint(countryInfo.todayDeaths)} total = {prettyPrint(countryInfo.deaths)}/>
+                <InfoBox active={casesType ==="deaths"} onClick={(e) => setCasesType("deaths")} title = "New Deaths Today" cases = {prettyPrint(countryInfo.todayDeaths)} total = {prettyPrint(countryInfo.deaths)}/>
 
             </div>
         
@@ -120,16 +120,19 @@ function App() {
         </div>
 
         <Card className = "app__right">
+
             {/* Table */}
             <CardContent>
               <h3>Live Cases by Country</h3>
               <Table countries= {tableData} />
             </CardContent>
+
             {/* Graph */}
             <CardContent>
-              <h3>Worldwide new Cases</h3>
-              <LineGraph />
+              <h3>Worldwide new {casesType}</h3>
+              <LineGraph casesType={casesType}/>
             </CardContent>
+
         </Card>
 
     </div>

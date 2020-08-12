@@ -13,3 +13,11 @@ All the packages need to be installed for this project:
 // leaflet        (Also the Map)
 // react-chartjs-2 chart.js   (graph chart chartjs)
 // numeral  (for formating numbers.. (currency, percentages, decimal places))
+
+
+firebase:
+
+firebase login
+firebase init
+npm run build
+firebase deploy
