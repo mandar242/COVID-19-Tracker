@@ -1,6 +1,7 @@
-# COVID - 19 Trakcer
+# COVID - 19 Tracker
 
 This is a Covid 19 Tracker created using React.js with features such as responsive design, interactive map and graph, and more.
+It can be used to view different counts such as new/total cases, new/total recovered cases, and new/total fatalities.
 
 - Front-end web development using [React.js](https://reactjs.org/), HTML, CSS.
 
